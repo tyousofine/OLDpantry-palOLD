@@ -1,27 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-export default function ChooseAI() {
-  return (
-    <section>
-        <div>Choose AI</div>
-        <p>use OpenAI recipe AI to create and original recipe based on your engridients.</p>
-        <p>images produced by open AI DALLi</p>
-        <h3>warning - eat at your own risk!</h3>
-        <h4>sample result:</h4>
-        <ul>
-            <li>ing1</li>
-            <li>ing2</li>
-            <li>ing3</li>
-            <li>ing4</li>
-        </ul>
-        <ol>
-            <li>step 1</li>
-            <li>step 2</li>
-            <li>step 3</li>
-            <li>step 4</li>
-        </ol>
+import ShrimpPuff from '../assets/shrimpPuff.jpg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRobot } from '@fortawesome/free-solid-svg-icons'
 
-        <Link to='/aiRecipe'>Create Recipe</Link>
-    </section>
+export default function ChooseAI({ingredients}) {
+
+const ingArray = ingredients.split(/[ ,]+/);
+
+const handleAIGenerate = () => {
+  
+}
+
+
+  return (
+    <section className='flex flex-col'>
+    <div>Choose AI</div>
+    <p>Use this option for AI to create a recipe for you based on the ingredients.</p>
+    <p>WARNING: </p>
+    <h4>sample result:</h4>
+    <img src={ShrimpPuff} alt="shrimp" className='max-w-md sm:max-w-sm px-4' />
+    <h3>Schrimp Puffs</h3>
+   <button 
+    className='btn'
+    onClick={() => {handleAIGenerate}}>
+      <FontAwesomeIcon icon={faRobot}/>
+      Use AI
+    </button>
+
+</section>
+
   )
 }

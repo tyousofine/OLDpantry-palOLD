@@ -8,7 +8,8 @@ export default {
     extend: {
       fontFamily: {
         inter: ['Inter var', 'sans-serif'],
-        tsukimi: ['tsukimi rounded', 'sans-serif']
+        tsukimi: ['tsukimi rounded', 'sans-serif'],
+        sunShine: ['Sunshiney', 'sans-serif']
 
       }
     },

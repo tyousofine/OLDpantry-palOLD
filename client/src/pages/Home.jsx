@@ -1,20 +1,27 @@
 import React from 'react'
 
 import Banner from '../components/Banner'
-import ChooseAI from '../components/ChooseAI'
-import ChooseAPI from '../components/ChooseAPI'
+
 import Footer from '../components/Footer'
+import MainSection from '../components/MainSection'
+import Loader from '../components/Loader';
+import ResultsAI from '../components/ResultsAI';
 
 
 function Home() {
+
   return (
-    <div className='w-screen h-screen bg-slate-200 overflow-hidden'>
-        <Banner></Banner>
-        <div className='grid grid-cols-2 border border-black h-[60%]'>
-       <ChooseAPI></ChooseAPI>
-       <ChooseAI></ChooseAI>
+    <div className='w-screen h-screen bg-slate-100 overflow-auto'>
+        <div className='h-44'>
+          <Banner />
         </div>
-        <Footer />
+  
+        <div className=' h-screen'>
+          <MainSection/>
+        </div>
+        <div className='bg-green-200 fixed bottom-0 min-h-[30px] w-screen px-4'>
+          <Footer />
+        </div>
     </div>
   )
 }
