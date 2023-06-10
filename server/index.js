@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 
 import dalleRoutes from './routes/dalleRoutes.js';
-import openAIRoutes from './routes/openAIRoutes.js';
-import tastyRoutes from './routes/tastyRoutes.js';
+// import openAIRoutes from './routes/openAIRoutes.js';
+// import tastyRoutes from './routes/tastyRoutes.js';
 
 dotenv.config();
 
@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 app.use('/api/v1/dalle', dalleRoutes);
-app.use('./api/v1/openAI', openAIRoutes);
-app.use('/api/v1/tasty', tastyRoutes);
+// app.use('./api/v1/openAI', openAIRoutes);
+// app.use('/api/v1/tasty', tastyRoutes);
 
 
 app.get('/', async (req, res) => {
