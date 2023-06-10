@@ -36,10 +36,10 @@ const handleSubmit = (e) => {
             </label>
         </form>
         <div className='grid sm:grid-cols-2 gap-4 mt-12 px-12 '>
-          <ChooseAPI />
+        
           <ChooseAI ingredients={ingredients}  />
         </div>
-        <ResultsAI />
+       
     </div>
   )
 }
