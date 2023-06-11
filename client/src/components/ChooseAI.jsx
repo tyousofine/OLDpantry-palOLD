@@ -14,18 +14,16 @@ export default function ChooseAI({ingredients}) {
 
 const ingArray = ingredients.split(/[ ,]+/).join(' ');
 console.log('ING ARRAY:', ingArray)
-const [data, setData] = useState('');
+const [recipe, setRecipe] = useState('');
 const [photo, setPhoto] = useState({});
 
 
-console.log("data from choose:", data);
-console.log("photo from choose: ", photo);
 
 const handleAIGenerate = async () => {
   
   try {
     setGenerating(true);
-    const response = await fetch('http://localhost:8080/api/v1/dalle', {
+    const dalleResponse = await fetch('http://localhost:8080/api/v1/dalle', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json'
@@ -33,14 +31,37 @@ const handleAIGenerate = async () => {
     body: JSON.stringify({ prompt: ingArray})
   })
   
-  const data = await response.json();
-  setData(data);
-  setPhoto({photo: `data:image/jpeg;base64,${data.image}`})
+  const photoData = await dalleResponse.json();
+  setPhoto({photo: `data:image/jpeg;base64,${photoData.image}`})
   
   } catch (e) {
   console.log("something went wrong fetching from dalle: ", e);
   } finally {
   setGenerating(false);
+  }
+
+  try {
+    setGenerating(true);
+    const davinciResponse = await fetch('http://localhost:8080/api/v1/davinci', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ prompt: ingArray })
+
+    })
+
+    const davinciData = await davinciResponse.json();
+    console.log('Davinci Data: ', davinciData);
+    setRecipe(davinciData.recipe);
+    console.log('RECIPE: ', recipe);
+
+
+  } catch (e) {
+    console.log('Someething went wrong generating recipe: ', e)
+    
+  } finally {
+    setGenerating(false);
   }
 }
 
@@ -53,8 +74,9 @@ return (
       <div>Choose AI</div>
       <p>Use this option for AI to create a recipe based on the ingredients.</p>
       <p>WARNING: Eat at your own risk!</p>
-      <img src={photo.photo} alt="photo" />
-   
+      {/* <img src={photo.photo} alt="photo" /> */}
+      {/* <div dangerouslySetInnerHTML={{ __html: recipe}}>
+        </div> */}
       <button 
         className='btn disabled:bg-green-200 disabled:cursor-not-allowed'
         onClick={handleAIGenerate}
@@ -65,7 +87,7 @@ return (
     </section>
     )}
 
-    <ResultsAI photo={photo}/>
+    <ResultsAI photo={photo} recipe={recipe}/>
   
   </>
 
