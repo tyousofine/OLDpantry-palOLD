@@ -30,9 +30,24 @@ const handleAIGenerate = async () => {
     },
     body: JSON.stringify({ prompt: ingArray})
   })
+
+  const davinciResponse = await fetch('http://localhost:8080/api/v1/davinci', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ prompt: ingArray })
+
+  })
+  
   
   const photoData = await dalleResponse.json();
   setPhoto({photo: `data:image/jpeg;base64,${photoData.image}`})
+  
+      const davinciData = await davinciResponse.json();
+      console.log('Davinci Data: ', davinciData);
+      setRecipe(davinciData.recipe);
+      console.log('RECIPE: ', recipe);
   
   } catch (e) {
   console.log("something went wrong fetching from dalle: ", e);
@@ -40,29 +55,6 @@ const handleAIGenerate = async () => {
   setGenerating(false);
   }
 
-  try {
-    setGenerating(true);
-    const davinciResponse = await fetch('http://localhost:8080/api/v1/davinci', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ prompt: ingArray })
-
-    })
-
-    const davinciData = await davinciResponse.json();
-    console.log('Davinci Data: ', davinciData);
-    setRecipe(davinciData.recipe);
-    console.log('RECIPE: ', recipe);
-
-
-  } catch (e) {
-    console.log('Someething went wrong generating recipe: ', e)
-    
-  } finally {
-    setGenerating(false);
-  }
 }
 
 return (
