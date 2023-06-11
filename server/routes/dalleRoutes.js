@@ -1,9 +1,9 @@
 import express from 'express';
-import * as dotent from 'dotenv';
+import * as dotenv from 'dotenv';
 import { Configuration, OpenAIApi } from 'openai';
 
 
-dotent.config();
+dotenv.config();
 
 const router = express.Router();
 
@@ -34,7 +34,7 @@ router.route('/').post(async (req, res) => {
         res.status(200).json({ image });
     } catch (e) {
         console.log("ERROR CREATING IMAGE: ", e)
-        res.status(500).send(error?.response.data.error.message);
+
 
     }
 })
